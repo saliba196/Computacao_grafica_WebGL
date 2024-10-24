@@ -5,7 +5,7 @@ if (!gl) {
   throw new Error("WebGL não suportado");
 }
 
-// GLSL do Vertex Shader
+
 const vertexShaderGLSL = `
 attribute vec2 position;
 
@@ -14,7 +14,7 @@ void main() {
 }
 `;
 
-// GLSL do Fragment Shader
+
 const fragmentShaderGLSL = `
 precision mediump float;
 
@@ -25,7 +25,7 @@ void main() {
 }
 `;
 
-// Função para criar shaders
+
 function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -49,9 +49,9 @@ if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
 
 gl.useProgram(program);
 
-// Definir as posições dos vértices para a flor
+
 const verticesFlor = new Float32Array([
-  // Centro da flor (círculo simplificado como um hexágono)
+  // Centro da flor 
   -0.1, 0.1, 0.1, 0.1, 0.2, 0.0, 0.1, -0.1, -0.1, -0.1, -0.2, 0.0,
 
   // Pétala superior
@@ -66,7 +66,7 @@ const verticesFlor = new Float32Array([
   // Pétala direita
   0.4, 0.1, 0.6, 0.0, 0.4, -0.1,
 
-  // Caule (retângulo)
+  // Caule 
   -0.05, -0.6, 0.05, -0.6, 0.05, -0.8, -0.05, -0.6, 0.05, -0.8, -0.05, -0.8,
 ]);
 
@@ -85,12 +85,12 @@ function desenharParte(cor, offset, count) {
   gl.drawArrays(gl.TRIANGLES, offset, count);
 }
 
-// Configurações do viewport
+
 gl.clearColor(1.0, 1.0, 1.0, 1.0);
 gl.clear(gl.COLOR_BUFFER_BIT);
 gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-// Desenhar a flor
+
 desenharParte([1.0, 1.0, 0.0, 1.0], 0, 6); // Centro da flor (amarelo)
 desenharParte([1.0, 0.0, 0.0, 1.0], 6, 3); // Pétala superior (vermelho)
 desenharParte([1.0, 0.0, 0.0, 1.0], 9, 3); // Pétala inferior (vermelho)
