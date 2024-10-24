@@ -5,7 +5,7 @@ if (!gl) {
   throw new Error("WebGL não suportado");
 }
 
-// GLSL do Vertex Shader
+
 const vertexShaderGLSL = `
 attribute vec2 position;
 
@@ -14,7 +14,7 @@ void main() {
 }
 `;
 
-// GLSL do Fragment Shader
+
 const fragmentShaderGLSL = `
 precision mediump float;
 
@@ -25,7 +25,7 @@ void main() {
 }
 `;
 
-// Criação dos shaders
+
 function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -49,12 +49,12 @@ if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
 
 gl.useProgram(program);
 
-// Definir as posições dos vértices para o carro
+
 const carroVertices = new Float32Array([
-  // Corpo do carro (um retângulo grande)
+  // Corpo do carro 
   -0.7, -0.2, 0.7, -0.2, 0.7, 0.2, -0.7, -0.2, 0.7, 0.2, -0.7, 0.2,
 
-  // Teto do carro (retângulo menor)
+  // Teto do carro
   -0.4, 0.2, 0.4, 0.2, 0.4, 0.4, -0.4, 0.2, 0.4, 0.4, -0.4, 0.4,
 
   // Roda esquerda
@@ -72,14 +72,14 @@ const positionLocation = gl.getAttribLocation(program, "position");
 gl.enableVertexAttribArray(positionLocation);
 gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-// Função para desenhar uma parte do carro com uma cor específica
+
 function desenharParte(cor, offset, count) {
   const colorLocation = gl.getUniformLocation(program, "u_color");
   gl.uniform4fv(colorLocation, cor);
   gl.drawArrays(gl.TRIANGLES, offset, count);
 }
 
-// Configurações do viewport
+
 gl.clearColor(1.0, 1.0, 1.0, 1.0);
 gl.clear(gl.COLOR_BUFFER_BIT);
 gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
