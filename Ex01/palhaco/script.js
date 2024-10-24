@@ -5,7 +5,6 @@ if (!gl) {
   throw new Error("WebGL não suportado");
 }
 
-// GLSL do Vertex Shader
 const vertexShaderGLSL = `
 attribute vec2 position;
 
@@ -14,7 +13,6 @@ void main() {
 }
 `;
 
-// GLSL do Fragment Shader
 const fragmentShaderGLSL = `
 precision mediump float;
 
@@ -25,7 +23,6 @@ void main() {
 }
 `;
 
-// Criação dos shaders
 function createShader(gl, type, source) {
   const shader = gl.createShader(type);
   gl.shaderSource(shader, source);
@@ -49,24 +46,23 @@ if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
 
 gl.useProgram(program);
 
-// Definir as posições dos vértices para o palhaço
 const verticesPalhaco = new Float32Array([
-  // Rosto (círculo - simplificado como um hexágono)
+  // Rosto
   -0.4, 0.2, 0.0, 0.5, 0.4, 0.2, 0.4, -0.2, 0.0, -0.5, -0.4, -0.2,
 
-  // Nariz (círculo - simplificado como triângulo)
+  // Nariz 
   -0.1, 0.0, 0.1, 0.0, 0.0, 0.1,
 
-  // Olho esquerdo (quadrado)
+  // Olho esquerdo
   -0.25, 0.15, -0.15, 0.15, -0.15, 0.25, -0.25, 0.15, -0.15, 0.25, -0.25, 0.25,
 
-  // Olho direito (quadrado)
+  // Olho direito 
   0.15, 0.15, 0.25, 0.15, 0.25, 0.25, 0.15, 0.15, 0.25, 0.25, 0.15, 0.25,
 
-  // Boca (semi-círculo simplificado como triângulo)
+  // Boca 
   -0.2, -0.3, 0.2, -0.3, 0.0, -0.1,
 
-  // Chapéu (triângulo grande)
+  // Chapéu 
   -0.5, 0.2, 0.5, 0.2, 0.0, 0.7,
 ]);
 
@@ -85,13 +81,13 @@ function desenharParte(cor, offset, count) {
   gl.drawArrays(gl.TRIANGLES, offset, count);
 }
 
-// Configurações do viewport
+
 gl.clearColor(1.0, 1.0, 1.0, 1.0);
 gl.clear(gl.COLOR_BUFFER_BIT);
 gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-// Desenhar o palhaço
-desenharParte([1.0, 0.8, 0.6, 1.0], 0, 6); // Rosto (cor de pele)
+// Desenhar 
+desenharParte([1.0, 0.8, 0.6, 1.0], 0, 6); // Rosto 
 desenharParte([1.0, 0.0, 0.0, 1.0], 6, 3); // Nariz (vermelho)
 desenharParte([0.0, 0.0, 0.0, 1.0], 9, 6); // Olhos (preto)
 desenharParte([1.0, 0.0, 0.0, 1.0], 15, 3); // Boca (vermelho)
